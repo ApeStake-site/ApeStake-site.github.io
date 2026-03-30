@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ApeStake — APE Staking Guide: BAYC, MAYC, BAKC Pools, APE Token Rewards &amp; How It Works (2026)</title>
+  <meta name="description" content="Complete ApeStake guide (2026): how ApeCoin staking works across the four pools (ApeCoin, BAYC, MAYC, BAKC), how NFT holders earn APE rewards, paired pool mechanics, claiming and compounding, security, APE token overview, and a deep FAQ for NFT holders and APE stakers.">
+  <meta name="author" content="Crypto Finance Experts">
+  <link rel="canonical" href="https://apestake-guide.example.com/">
+  <link rel="icon" type="image/png" href="ape.png">
+
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://apestake-guide.example.com/">
+  <meta property="og:title" content="ApeStake — APE Staking Guide: BAYC, MAYC, BAKC &amp; APE Token (2026)">
+  <meta property="og:description" content="Complete ApeStake guide: four staking pools, NFT holder rewards, paired BAKC mechanics, APE tokenomics, claiming strategy, and security.">
+  <meta property="og:image" content="cover.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ApeStake — APE Staking Guide (2026)">
+  <meta name="twitter:description" content="How ApeStake works, BAYC/MAYC/BAKC staking pools, APE rewards, claiming, and NFT staking mechanics for 2026.">
+
+  <style>
+    :root {
+      --b:    #0054FA;
+      --b2:   #0046D0;
+      --b3:   #0038A8;
+      --ba:   #4D8EFF;
+      --bb:   #99BFFF;
+
+      /* gold accent — BAYC brand */
+      --g:    #C8A95B;
+      --ga:   #E0C47A;
+      --gb:   #F5E4B8;
+
+      --ink:   #F5F8FF;
+      --sub:   #99BFFF;
+      --muted: #94A3B8;
+      --dim:   #64748B;
+
+      --bg:    #030610;
+      --card:  rgba(255,255,255,.028);
+      --line:  rgba(255,255,255,.07);
+      --lb:    rgba(0,84,250,.14);
+      --lg:    rgba(200,169,91,.12);
+
+      --ok:   #34D399;
+      --warn: #FBBF24;
+      --err:  #F87171;
+
+      --r:  12px;
+      --rl: 18px;
+      --gap: 1.2rem;
+      --sh: 0 8px 32px rgba(0,0,0,.66);
+      --shb: 0 4px 26px rgba(0,84,250,.14);
+      --shg: 0 4px 20px rgba(200,169,91,.14);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0 }
+    html { scroll-behavior: smooth }
+    body {
+      font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      background-image:
+        radial-gradient(ellipse 960px 540px at 0%   0%,  rgba(0,70,208,.12),  transparent 55%),
+        radial-gradient(ellipse 700px 420px at 100% 8%,  rgba(200,169,91,.06), transparent 50%),
+        radial-gradient(ellipse 600px 380px at 50%  97%, rgba(0,56,168,.08),   transparent 55%);
+      color: var(--muted);
+      line-height: 1.72;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    a { color: var(--ba); text-decoration: none }
+    a:hover { text-decoration: underline }
+    img { max-width: 100%; height: auto; display: block }
+    strong { color: #CCE0FF; font-weight: 600 }
+    .container { max-width: 1080px; margin: 0 auto; padding: 0 1.4rem }
+
+    h1,h2,h3,h4 { color: var(--ink); line-height: 1.25 }
+    h1 { font-size: clamp(2rem,5vw,3.2rem); font-weight: 800; letter-spacing: -.5px }
+    h2 { font-size: clamp(1.25rem,2.5vw,1.75rem); font-weight: 700; margin-top: 1.8rem; padding-top: .7rem; border-top: 1px solid var(--line) }
+    h3 { font-size: 1.08rem; font-weight: 700; color: var(--sub) }
+    p,li,td,th { font-size: 1rem; line-height: 1.75 }
+    .lead { font-size: 1.08rem; color: #A8CAFF }
+
+    /* ── HERO ── */
+    header.hero {
+      padding: clamp(2.5rem,6vw,5.5rem) 0 clamp(2rem,4vw,3.5rem);
+      border-bottom: 1px solid var(--line);
+    }
+    .hero-card {
+      background: rgba(0,70,208,.05);
+      border: 1px solid var(--lb);
+      border-radius: var(--rl);
+      padding: clamp(1.5rem,3.5vw,2.6rem);
+      box-shadow: var(--sh), var(--shb);
+      position: relative; overflow: hidden;
+    }
+    /* dual shimmer — blue + gold */
+    .hero-card::after {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg,
+        transparent 4%,
+        rgba(77,142,255,.55) 28%,
+        rgba(0,84,250,.80) 45%,
+        rgba(200,169,91,.70) 55%,
+        rgba(77,142,255,.55) 72%,
+        transparent 96%
+      );
+    }
+
+    .brand-row { display: flex; align-items: center; gap: .95rem; margin-bottom: 1rem }
+    .brand-logo {
+      width: 56px; height: 56px; border-radius: 14px;
+      border: 1px solid rgba(0,84,250,.30);
+      background: rgba(0,70,208,.12);
+      padding: .3rem; object-fit: contain;
+      box-shadow: 0 4px 18px rgba(0,84,250,.22);
+      flex: 0 0 auto;
+    }
+    .brand-label { color: var(--dim); font-size: .85rem; font-weight: 600; text-transform: uppercase; letter-spacing: .4px }
+    .brand-sub   { color: var(--muted); font-size: .85rem }
+
+    /* ── CTA ── */
+    .cta-center { display: flex; justify-content: center; margin-top: 2.2rem }
+    .cta {
+      display: inline-flex; align-items: center; gap: .7rem;
+      background: linear-gradient(135deg, #4D8EFF 0%, #0054FA 40%, #0046D0 76%, #0038A8 100%);
+      color: #fff;
+      padding: 1.2rem 3.2rem;
+      border-radius: 16px;
+      font-weight: 900; font-size: 1.15rem; letter-spacing: .15px;
+      box-shadow:
+        0 0 0 1px rgba(0,84,250,.26),
+        0 0 36px rgba(0,84,250,.36),
+        0 8px 24px rgba(0,70,208,.30),
+        0 22px 50px rgba(0,56,168,.24);
+      border: none; cursor: pointer; text-decoration: none;
+      transition: transform .18s, box-shadow .18s, filter .18s;
+    }
+    .cta:hover {
+      transform: translateY(-3px) scale(1.025); filter: brightness(1.08);
+      color: #fff; text-decoration: none;
+      box-shadow:
+        0 0 0 1px rgba(0,84,250,.42),
+        0 0 52px rgba(0,84,250,.52),
+        0 10px 32px rgba(0,70,208,.42),
+        0 28px 60px rgba(0,56,168,.32);
+    }
+
+    /* ── NOTE ── */
+    .note {
+      border-left: 3px solid var(--ba);
+      padding: .85rem 1rem;
+      background: rgba(0,70,208,.07);
+      border-radius: 0 9px 9px 0;
+      color: var(--sub); margin-top: 1rem;
+    }
+    .note.gold {
+      border-left-color: var(--ga);
+      background: rgba(200,169,91,.07);
+      color: var(--gb);
+    }
+
+    /* ── STEPS ── */
+    section.step-guide {
+      padding: clamp(2rem,5vw,3.5rem) 0;
+      border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    }
+    .steps { display: grid; gap: var(--gap); grid-template-columns: 1fr }
+    .step {
+      background: var(--card); border: 1px solid var(--line);
+      border-top: 2px solid rgba(0,84,250,.30); border-radius: var(--r);
+      padding: 1.25rem; box-shadow: var(--sh); transition: transform .18s, box-shadow .18s;
+    }
+    .step:hover { transform: translateY(-3px); box-shadow: var(--sh), var(--shb) }
+    .step .icon {
+      width: 44px; height: 44px; border-radius: 9px;
+      display: inline-grid; place-items: center;
+      background: rgba(0,70,208,.12); margin-bottom: .65rem;
+      font-weight: 800; font-size: .95rem; color: var(--ba);
+      border: 1px solid rgba(0,84,250,.24);
+    }
+
+    /* ── CARD ── */
+    main { padding-top: .5rem }
+    main .card {
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: var(--r); padding: 1.5rem; margin: 1.2rem 0; box-shadow: var(--sh);
+    }
+    main .card > h2:first-child { margin-top: 0; border-top: none; padding-top: 0 }
+
+    /* ── TOC ── */
+    .toc { border: 1px solid var(--lb); background: rgba(0,70,208,.05); border-radius: var(--r); padding: 1.1rem 1.3rem }
+    .toc strong { color: var(--ink) }
+    .toc ul { margin: .5rem 0 0; padding-left: 1.1rem }
+    .toc li { margin: .28rem 0; font-size: .96rem }
+    .toc a { font-weight: 600 }
+
+    /* ── CALLOUT GRID ── */
+    .callout-grid { display: grid; gap: var(--gap); grid-template-columns: 1fr; margin-top: .8rem }
+    .mini { background: rgba(255,255,255,.02); border: 1px solid var(--line); border-radius: var(--r); padding: 1rem }
+    .mini h3 { margin-bottom: .35rem }
+    .kpi-badges { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: .55rem }
+    .kpi-badges span {
+      border: 1px solid rgba(0,84,250,.22); background: rgba(0,70,208,.09);
+      color: var(--sub); padding: .26rem .54rem;
+      border-radius: 999px; font-size: .87rem; font-weight: 600;
+    }
+    .kpi-badges span.gold {
+      border-color: rgba(200,169,91,.30); background: rgba(200,169,91,.09);
+      color: var(--ga);
+    }
+
+    /* ── NFT POOL CARDS — unique design element ── */
+    .pool-grid {
+      display: grid; grid-template-columns: 1fr; gap: var(--gap); margin-top: 1rem;
+    }
+    .pool-card {
+      border-radius: var(--r); padding: 1.2rem 1.4rem;
+      border: 1px solid var(--line);
+      position: relative; overflow: hidden;
+      transition: transform .18s, box-shadow .18s;
+    }
+    .pool-card:hover { transform: translateY(-3px) }
+    .pool-card::before {
+      content: ''; position: absolute; top: 0; left: 0; bottom: 0; width: 3px;
+    }
+    /* pool themes */
+    .pool-ape  { background: rgba(0,70,208,.06);  border-color: rgba(0,84,250,.18) }
+    .pool-ape::before  { background: var(--b) }
+    .pool-ape:hover    { box-shadow: var(--shb) }
+
+    .pool-bayc { background: rgba(200,169,91,.06); border-color: rgba(200,169,91,.22) }
+    .pool-bayc::before { background: var(--g) }
+    .pool-bayc:hover   { box-shadow: var(--shg) }
+
+    .pool-mayc { background: rgba(139,92,246,.06); border-color: rgba(139,92,246,.22) }
+    .pool-mayc::before { background: #8B5CF6 }
+    .pool-mayc:hover   { box-shadow: 0 4px 20px rgba(139,92,246,.18) }
+
+    .pool-bakc { background: rgba(52,211,153,.06); border-color: rgba(52,211,153,.20) }
+    .pool-bakc::before { background: #34D399 }
+    .pool-bakc:hover   { box-shadow: 0 4px 20px rgba(52,211,153,.16) }
+
+    .pool-title {
+      font-weight: 800; font-size: 1rem; margin-bottom: .35rem;
+      display: flex; align-items: center; gap: .6rem;
+    }
+    .pool-tag {
+      font-size: .78rem; font-weight: 700; padding: .18rem .5rem;
+      border-radius: 999px; text-transform: uppercase; letter-spacing: .3px;
+    }
+    .pool-ape  .pool-tag { background: rgba(0,84,250,.15);    color: var(--ba)  }
+    .pool-bayc .pool-tag { background: rgba(200,169,91,.15);  color: var(--ga)  }
+    .pool-mayc .pool-tag { background: rgba(139,92,246,.15);  color: #A78BFA    }
+    .pool-bakc .pool-tag { background: rgba(52,211,153,.15);  color: #34D399    }
+
+    .pool-meta { font-size: .9rem; color: var(--muted); margin-top: .1rem }
+    .pool-stats {
+      display: flex; flex-wrap: wrap; gap: .8rem; margin-top: .7rem;
+    }
+    .pool-stat { font-size: .85rem }
+    .pool-stat .label { color: var(--dim); font-size: .78rem; text-transform: uppercase; letter-spacing: .3px }
+    .pool-stat .val   { color: var(--ink); font-weight: 700 }
+
+    /* ── TOKO BARS ── */
+    .toko-bar { display: flex; flex-direction: column; gap: .6rem; margin-top: 1rem }
+    .toko-row { display: flex; align-items: center; gap: .85rem }
+    .toko-label { min-width: 200px; font-size: .92rem; color: #CCE0FF; font-weight: 600 }
+    .toko-track { flex: 1; height: 8px; background: rgba(255,255,255,.07); border-radius: 999px; overflow: hidden }
+    .toko-fill  { height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--ba), var(--b)) }
+    .toko-fill.gold { background: linear-gradient(90deg, var(--ga), var(--g)) }
+    .toko-val   { min-width: 55px; text-align: right; font-size: .9rem; font-weight: 700; color: var(--ba) }
+    .toko-val.gold { color: var(--ga) }
+
+    /* ── TABLE ── */
+    .table-wrap { overflow-x: auto; border-radius: var(--r); border: 1px solid var(--line) }
+    table { width: 100%; border-collapse: collapse; min-width: 480px }
+    th,td { padding: .8rem .95rem; border-bottom: 1px solid var(--line); text-align: left }
+    th { background: rgba(0,70,208,.07); color: var(--ink); font-weight: 700; font-size: .92rem }
+    tr.hi { background: rgba(0,70,208,.04) }
+    tr:hover td { background: rgba(255,255,255,.018) }
+    tr:last-child td { border-bottom: none }
+    .ok { color: var(--ok) } .warn { color: var(--warn) } .err { color: var(--err) }
+
+    /* ── EEAT ── */
+    .eeat { background: var(--card); border: 1px solid var(--lb); border-radius: var(--r); padding: 1.5rem; box-shadow: var(--sh) }
+    .eeat > h2:first-child { margin-top: 0; border-top: none; padding-top: 0 }
+
+    /* ── FAQ ── */
+    .faq-item { border-bottom: 1px solid var(--line); padding: .9rem 0 }
+    .faq-item:last-child { border-bottom: none }
+    .faq-button { all: unset; display: flex; justify-content: space-between; align-items: flex-start; width: 100%; cursor: pointer; gap: 1rem }
+    .faq-button:focus-visible { outline: 2px solid var(--b); border-radius: 4px }
+    .faq-button h3 { margin: 0; font-weight: 700; font-size: 1rem; line-height: 1.4 }
+    .faq-content { max-height: 0; overflow: hidden; transition: max-height .26s ease }
+    .faq-content.open { padding-top: .65rem }
+    .faq-plus { font-weight: 800; font-size: 1.35rem; color: var(--ba); flex: 0 0 auto; line-height: 1; transition: transform .2s }
+    .faq-button[aria-expanded="true"] .faq-plus { transform: rotate(45deg) }
+
+    @media(min-width:860px){
+      .steps { grid-template-columns: repeat(4,1fr) }
+      .callout-grid { grid-template-columns: 1fr 1fr }
+      .pool-grid { grid-template-columns: 1fr 1fr }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero" role="banner">
+  <div class="container">
+    <div class="hero-card">
+      <div class="brand-row">
+        <img class="brand-logo" src="ape.png" alt="ApeStake logo">
+        <div>
+          <div class="brand-label">Official APE Staking Protocol</div>
+          <div class="brand-sub">ApeCoin Pool · BAYC Pool · MAYC Pool · BAKC Paired Pool · APE Rewards · NFT Holders</div>
+        </div>
+      </div>
+
+      <h1>ApeStake</h1>
+      <p class="lead" style="margin-top:.75rem">
+        The complete guide to <strong>ApeStake</strong> — the official
+        <strong>ApeCoin (APE) staking protocol</strong> built for the
+        Bored Ape Yacht Club ecosystem. Understand how
+        <strong>four distinct staking pools</strong> reward different
+        participants — the general <strong>APE token pool</strong>,
+        the <strong>BAYC NFT pool</strong>, the <strong>MAYC NFT pool</strong>,
+        and the <strong>BAKC paired pool</strong> — each with its own
+        allocation, cap per NFT, and reward mechanics.
+        Learn how <strong>NFT holders earn enhanced APE rewards</strong>
+        beyond what token-only stakers receive,
+        how the <strong>paired BAKC mechanic</strong> works,
+        the <strong>claiming and compounding strategy</strong>
+        that maximises long-term yield, and the full
+        <strong>security and smart-contract risk profile</strong>
+        for every pool.
+      </p>
+
+      <div class="cta-center">
+        <a href="#" class="cta" aria-label="Open ApeStake App">
+          <span>🦍</span> Open ApeStake
+        </a>
+      </div>
+
+      <div class="note gold">
+        <strong>Built for the Bored Ape ecosystem:</strong> ApeStake was created by
+        Horizen Labs on behalf of ApeCoin DAO — the governing body of the APE token.
+        It is the sole <em>official</em> APE staking protocol and the only venue
+        where BAYC, MAYC, and BAKC NFT holders can stake their NFTs
+        to earn the enhanced APE allocations voted on by the DAO.
+        Any other "APE staking" site should be treated with extreme caution.
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- STEPS -->
+<section class="step-guide" aria-labelledby="how-works">
+  <div class="container">
+    <h2 id="how-works" style="margin-top:0;border-top:none;padding-top:0">
+      How ApeStake Works: Connect → Choose Pool → Stake APE or NFT → Claim Rewards
+    </h2>
+    <div class="steps" role="list">
+      <article class="step" role="listitem">
+        <div class="icon">01</div>
+        <h3>Connect your Ethereum wallet</h3>
+        <p>ApeStake runs on Ethereum mainnet. Connect MetaMask or any EVM wallet holding APE tokens and/or BAYC, MAYC, or BAKC NFTs. The staking interface detects your assets and shows which pools are available to you.</p>
+      </article>
+      <article class="step" role="listitem">
+        <div class="icon">02</div>
+        <h3>Select your pool</h3>
+        <p>Choose from four pools: APE (open to all), BAYC (requires owning a BAYC), MAYC (requires MAYC), or BAKC (requires pairing with BAYC or MAYC). Each pool has a different maximum stake per position and a different share of the total APE reward allocation.</p>
+      </article>
+      <article class="step" role="listitem">
+        <div class="icon">03</div>
+        <h3>Stake APE tokens (and optionally commit NFTs)</h3>
+        <p>In the NFT pools, you stake APE tokens — up to the pool cap per NFT — and commit your NFT to the pool. Your NFT remains in your wallet but its tokenID is registered to that staking position. APE rewards accrue every block.</p>
+      </article>
+      <article class="step" role="listitem">
+        <div class="icon">04</div>
+        <h3>Claim rewards and manage positions</h3>
+        <p>Claim accrued APE rewards at any time — pay a gas fee and receive APE directly to your wallet. Compound by restaking claimed APE. Unstake your APE (and decommit your NFT) at any time with no lockup. NFT transfers automatically unstake the associated position.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN -->
+<main class="container" role="main">
+
+  <!-- TOC -->
+  <section class="card toc" aria-label="Table of Contents">
+    <strong>On this page — ApeStake:</strong>
+    <ul>
+      <li><a href="#overview">What is ApeStake and the ApeCoin ecosystem context</a></li>
+      <li><a href="#pools">The four staking pools: APE, BAYC, MAYC, and BAKC explained</a></li>
+      <li><a href="#nft-mechanics">NFT staking mechanics: how NFT commitment works</a></li>
+      <li><a href="#bakc">BAKC paired pool: the special mechanic for Dog holders</a></li>
+      <li><a href="#ape-token">APE token: utility, governance, and tokenomics</a></li>
+      <li><a href="#rewards">APE reward structure: allocations, caps, and how APR changes</a></li>
+      <li><a href="#claiming">Claiming and compounding: maximising long-term APE yield</a></li>
+      <li><a href="#safety">ApeStake security and risks</a></li>
+      <li><a href="#comparison">ApeStake vs other NFT staking protocols</a></li>
+      <li><a href="#best-practices">Best practices for APE stakers and NFT holders</a></li>
+      <li><a href="#troubleshooting">Troubleshooting: missing rewards, NFT transfers, staking errors</a></li>
+      <li><a href="#eeat">Authoritative sources &amp; references</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+  </section>
+
+  <!-- OVERVIEW -->
+  <section class="card" id="overview">
+    <h2>What Is ApeStake and the ApeCoin Ecosystem Context</h2>
+    <p>
+      <strong>ApeStake</strong> (at apestake.io) is the official APE staking protocol
+      deployed by Horizen Labs under the direction of <strong>ApeCoin DAO</strong> —
+      the decentralised governance body that controls the APE token and its ecosystem fund.
+      The protocol launched in December 2022 following an ApeCoin DAO governance vote
+      to allocate APE tokens as staking rewards across the BAYC NFT ecosystem.
+    </p>
+    <p>
+      The staking programme was designed with a specific goal: reward long-term holders
+      of both <strong>APE tokens</strong> and <strong>Bored Ape Yacht Club NFTs</strong>
+      (BAYC, MAYC, and BAKC) — aligning the incentives of the ecosystem's token holders
+      and NFT collectors around a shared yield mechanism, while deploying a portion of
+      the DAO's substantial APE treasury in a way that reduces inflationary sell pressure
+      by incentivising holding.
+    </p>
+
+    <div class="callout-grid">
+      <div class="mini">
+        <h3>For APE token holders</h3>
+        <p style="color:var(--muted)">Any APE holder can stake in the general APE pool with no maximum cap. Earn a continuous stream of APE rewards proportional to your share of the pool. No lockup — withdraw at any time. The most accessible entry point to ApeStake for participants without NFTs.</p>
+        <div class="kpi-badges">
+          <span>No NFT required</span><span>No cap</span><span>No lockup</span>
+        </div>
+      </div>
+      <div class="mini">
+        <h3>For BAYC NFT holders</h3>
+        <p style="color:var(--muted)">BAYC holders access the highest-cap pool with the largest per-NFT APE allocation. Stake up to the BAYC pool cap per Ape and earn the premium staking rate that reflects BAYC's position as the flagship collection in the ecosystem.</p>
+        <div class="kpi-badges">
+          <span class="gold">Highest pool cap</span><span class="gold">Premium APE rate</span><span>BAYC required</span>
+        </div>
+      </div>
+      <div class="mini">
+        <h3>For MAYC NFT holders</h3>
+        <p style="color:var(--muted)">Mutant Ape Yacht Club holders access the MAYC pool with a mid-tier cap per NFT. Lower entry barrier than BAYC (MAYCs are more accessible by price) with meaningful staking rewards for committed holders.</p>
+        <div class="kpi-badges">
+          <span>Mid-tier cap</span><span>MAYC required</span><span>More accessible</span>
+        </div>
+      </div>
+      <div class="mini">
+        <h3>For BAKC (Dog) holders</h3>
+        <p style="color:var(--muted)">Bored Ape Kennel Club (Dog) holders access the BAKC pool — but with a unique mechanic: BAKC must be <em>paired</em> with either a BAYC or MAYC from the same wallet. The BAKC pool acts as a bonus multiplier for holders who own Dogs alongside their Apes.</p>
+        <div class="kpi-badges">
+          <span>Paired mechanic</span><span>Requires BAYC or MAYC</span><span>Bonus rewards</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- POOLS -->
+  <section class="card" id="pools">
+    <h2>The Four Staking Pools: APE, BAYC, MAYC, and BAKC Explained</h2>
+    <p>
+      ApeStake distributes APE rewards across four separate pools —
+      each with its own annual APE reward allocation, staking cap per position,
+      and eligibility requirements.
+    </p>
+
+    <!-- NFT Pool Cards — unique design element -->
+    <div class="pool-grid" role="list" aria-label="ApeStake staking pools">
+
+      <div class="pool-card pool-ape" role="listitem">
+        <div class="pool-title">
+          <span>🪙</span>
+          ApeCoin Pool
+          <span class="pool-tag">APE</span>
+        </div>
+        <div class="pool-meta">Open to all APE holders — no NFT required</div>
+        <div class="pool-stats">
+          <div class="pool-stat"><div class="label">Eligibility</div><div class="val">Any APE holder</div></div>
+          <div class="pool-stat"><div class="label">Stake cap</div><div class="val">Uncapped per wallet</div></div>
+          <div class="pool-stat"><div class="label">Reward allocation</div><div class="val">30% of total</div></div>
+          <div class="pool-stat"><div class="label">Lockup</div><div class="val">None — withdraw anytime</div></div>
+        </div>
+      </div>
+
+      <div class="pool-card pool-bayc" role="listitem">
+        <div class="pool-title">
+          <span>🦍</span>
+          BAYC Pool
+          <span class="pool-tag">BAYC</span>
+        </div>
+        <div class="pool-meta">Premium pool for Bored Ape Yacht Club holders</div>
+        <div class="pool-stats">
+          <div class="pool-stat"><div class="label">Eligibility</div><div class="val">BAYC NFT holder</div></div>
+          <div class="pool-stat"><div class="label">Stake cap</div><div class="val">High APE cap per BAYC</div></div>
+          <div class="pool-stat"><div class="label">Reward allocation</div><div class="val">47% of total</div></div>
+          <div class="pool-stat"><div class="label">Lockup</div><div class="val">None — NFT stays in wallet</div></div>
+        </div>
+      </div>
+
+      <div class="pool-card pool-mayc" role="listitem">
+        <div class="pool-title">
+          <span>🧬</span>
+          MAYC Pool
+          <span class="pool-tag">MAYC</span>
+        </div>
+        <div class="pool-meta">Staking pool for Mutant Ape Yacht Club holders</div>
+        <div class="pool-stats">
+          <div class="pool-stat"><div class="label">Eligibility</div><div class="val">MAYC NFT holder</div></div>
+          <div class="pool-stat"><div class="label">Stake cap</div><div class="val">Mid-tier APE cap per MAYC</div></div>
+          <div class="pool-stat"><div class="label">Reward allocation</div><div class="val">19% of total</div></div>
+          <div class="pool-stat"><div class="label">Lockup</div><div class="val">None — NFT stays in wallet</div></div>
+        </div>
+      </div>
+
+      <div class="pool-card pool-bakc" role="listitem">
+        <div class="pool-title">
+          <span>🐕</span>
+          BAKC Pool (Paired)
+          <span class="pool-tag">BAKC</span>
+        </div>
+        <div class="pool-meta">Bonus pool — requires BAKC + BAYC or MAYC in same wallet</div>
+        <div class="pool-stats">
+          <div class="pool-stat"><div class="label">Eligibility</div><div class="val">BAKC + (BAYC or MAYC)</div></div>
+          <div class="pool-stat"><div class="label">Stake cap</div><div class="val">Lower APE cap per pair</div></div>
+          <div class="pool-stat"><div class="label">Reward allocation</div><div class="val">4% of total</div></div>
+          <div class="pool-stat"><div class="label">Mechanic</div><div class="val">BAKC paired to BAYC or MAYC</div></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="note" style="margin-top:1.2rem">
+      <strong>Pool allocations are fixed by DAO governance:</strong>
+      The percentage allocation of APE rewards to each pool was determined by an
+      ApeCoin DAO governance vote and is baked into the smart contract.
+      Actual APR per pool fluctuates as total staked APE in each pool rises or falls —
+      higher participation in a pool dilutes each individual staker's share
+      of that pool's fixed reward allocation.
+    </div>
+  </section>
+
+  <!-- NFT MECHANICS -->
+  <section class="card" id="nft-mechanics">
+    <h2>NFT Staking Mechanics: How NFT Commitment Works on ApeStake</h2>
+    <p>
+      A common misconception: staking on ApeStake does NOT send your NFT to a contract.
+      Your BAYC, MAYC, or BAKC stays in your wallet throughout — but its tokenID is
+      <strong>registered</strong> to a staking position, committing it without transfer.
+    </p>
+
+    <div class="callout-grid">
+      <div class="mini">
+        <h3>What "committing" an NFT means</h3>
+        <p style="color:var(--muted)">When you stake in the BAYC, MAYC, or BAKC pool, you're associating a specific NFT tokenID with your staking position. The ApeStake contract records this association on-chain. Your NFT remains in your wallet, appears in your OpenSea profile, and can be listed for sale — but if it's transferred or sold while staked, the staking position automatically closes and rewards stop accruing.</p>
+        <div class="kpi-badges"><span>NFT stays in wallet</span><span>TokenID registered</span><span>Sale triggers unstake</span></div>
+      </div>
+      <div class="mini">
+        <h3>APE cap per NFT</h3>
+        <p style="color:var(--muted)">Each NFT pool has a maximum amount of APE that can be staked per NFT tokenID. Staking above the cap is not possible — the transaction will fail. The cap was set by DAO governance to limit concentration and ensure rewards are distributed proportionally across all NFT holders who participate.</p>
+        <div class="kpi-badges"><span>Hard cap per tokenID</span><span>DAO-determined</span><span>Can't over-stake</span></div>
+      </div>
+    </div>
+
+    <div class="table-wrap" style="margin-top:1rem">
+      <table aria-label="NFT staking scenarios">
+        <thead>
+          <tr><th>Scenario</th><th>What happens to staking</th></tr>
+        </thead>
+        <tbody>
+          <tr class="hi">
+            <td>Sell BAYC/MAYC/BAKC while staked</td>
+            <td>Staking position auto-closes; accrued APE claimable by original staker; APE returned to wallet</td>
+          </tr>
+          <tr>
+            <td>Transfer NFT to another wallet</td>
+            <td>Same as sale — staking closes; the new owner must re-stake from their wallet independently</td>
+          </tr>
+          <tr class="hi">
+            <td>List NFT for sale on OpenSea</td>
+            <td>Listing is fine — staking continues until the sale transaction executes and transfers ownership</td>
+          </tr>
+          <tr>
+            <td>Use NFT in ApeWorld / Otherside</td>
+            <td>Depends on the application — verify the application's requirements; some use-cases do not require transfer</td>
+          </tr>
+          <tr class="hi">
+            <td>Multiple NFTs in same wallet</td>
+            <td>Each NFT can have an independent staking position — stake multiple BAYCs/MAYCs simultaneously</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- BAKC PAIRED -->
+  <section class="card" id="bakc">
+    <h2>BAKC Paired Pool: The Special Mechanic for Dog Holders</h2>
+    <p>
+      The <strong>Bored Ape Kennel Club (BAKC)</strong> pool has a unique mechanic
+      that distinguishes it from the other three pools — it requires
+      <strong>pairing</strong> a BAKC NFT with either a BAYC or MAYC NFT
+      from the same wallet.
+    </p>
+
+    <div class="callout-grid">
+      <div class="mini">
+        <h3>How BAKC pairing works</h3>
+        <p style="color:var(--muted)">To stake in the BAKC pool, you must pair each BAKC tokenID with a specific BAYC or MAYC tokenID from your wallet. The pair is recorded on-chain — both NFTs are committed together. You can stake APE up to the BAKC pool cap in this paired position. The BAYC/MAYC used in the pair can simultaneously have its own separate BAYC/MAYC pool staking position.</p>
+        <div class="kpi-badges"><span>BAKC + BAYC or MAYC</span><span>Same wallet</span><span>Both committed</span></div>
+      </div>
+      <div class="mini">
+        <h3>Breaking a BAKC pair</h3>
+        <p style="color:var(--muted)">You can unpair a BAKC position at any time. Unpairing closes the BAKC staking position (your APE and accrued rewards become claimable) but does not affect the BAYC/MAYC's own separate staking position in the BAYC/MAYC pool. You can re-pair the BAKC with a different BAYC or MAYC if desired.</p>
+        <div class="kpi-badges"><span>Unpair anytime</span><span>BAYC/MAYC stake unaffected</span><span>Re-pairable</span></div>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>BAKC as a bonus layer:</strong> The BAKC pool is best understood as a
+      <em>bonus staking layer</em> for ecosystem participants who already hold Dogs.
+      BAKC staking adds additional APE yield on top of whatever your BAYC/MAYC positions earn —
+      maximising total APE accumulation for the most committed ecosystem participants
+      who hold multiple collection types.
+    </div>
+  </section>
+
+  <!-- APE TOKEN -->
+  <section class="card" id="ape-token">
+    <h2>APE Token: Utility, Governance, and Tokenomics</h2>
+    <p>
+      <strong>ApeCoin (APE)</strong> is the ERC-20 governance and utility token
+      of the Bored Ape Yacht Club ecosystem — governed by ApeCoin DAO and used
+      across Yuga Labs' expanding Web3 universe.
+    </p>
+
+    <div class="table-wrap">
+      <table aria-label="APE token utility">
+        <thead>
+          <tr><th>Function</th><th>How APE is used</th></tr>
+        </thead>
+        <tbody>
+          <tr class="hi">
+            <td>DAO Governance</td>
+            <td>APE holders vote on proposals to the ApeCoin DAO — controlling the ecosystem fund, grant allocations, protocol parameters, and strategic partnerships</td>
+          </tr>
+          <tr>
+            <td>ApeStake rewards</td>
+            <td>APE is the reward token distributed to all four staking pools — the primary yield mechanism for ApeStake participants</td>
+          </tr>
+          <tr class="hi">
+            <td>Otherside / ApeWorld</td>
+            <td>APE is the currency for Yuga Labs' metaverse ecosystem — purchasing Otherdeeds, in-game transactions, and digital goods in the Otherside experience</td>
+          </tr>
+          <tr>
+            <td>Partner ecosystem</td>
+            <td>APE is accepted by brands and partners operating in the BAYC ecosystem — merchandise, events, and licensed products from Yuga Labs-affiliated partners</td>
+          </tr>
+          <tr class="hi">
+            <td>Exchange trading</td>
+            <td>APE is listed on all major centralised exchanges and Uniswap — providing liquidity for stakers who want to convert rewards to ETH or stablecoins</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="toko-bar" role="list" aria-label="APE token distribution">
+      <div class="toko-row" role="listitem">
+        <span class="toko-label">Ecosystem fund (DAO)</span>
+        <div class="toko-track"><div class="toko-fill" style="width:62%"></div></div>
+        <span class="toko-val">62%</span>
+      </div>
+      <div class="toko-row" role="listitem">
+        <span class="toko-label">BAYC / MAYC airdrop</span>
+        <div class="toko-track"><div class="toko-fill gold" style="width:15%"></div></div>
+        <span class="toko-val gold">15%</span>
+      </div>
+      <div class="toko-row" role="listitem">
+        <span class="toko-label">Yuga Labs + charity</span>
+        <div class="toko-track"><div class="toko-fill" style="width:14%"></div></div>
+        <span class="toko-val">14%</span>
+      </div>
+      <div class="toko-row" role="listitem">
+        <span class="toko-label">Launch contributors</span>
+        <div class="toko-track"><div class="toko-fill" style="width:8%"></div></div>
+        <span class="toko-val">8%</span>
+      </div>
+      <div class="toko-row" role="listitem">
+        <span class="toko-label">Jane Goodall legacy</span>
+        <div class="toko-track"><div class="toko-fill gold" style="width:1%"></div></div>
+        <span class="toko-val gold">1%</span>
+      </div>
+    </div>
+    <p style="font-size:.88rem; color:var(--dim); margin-top:.6rem">Total supply: 1,000,000,000 APE (fixed). Verify via official ApeCoin documentation.</p>
+  </section>
+
+  <!-- REWARDS -->
+  <section class="card" id="rewards">
+    <h2>APE Reward Structure: Allocations, Caps, and How APR Changes Over Time</h2>
+    <p>
+      Understanding how APR is calculated in ApeStake is critical — it's not fixed,
+      and it can change dramatically as total staked APE fluctuates.
+    </p>
+
+    <div class="callout-grid">
+      <div class="mini">
+        <h3>Why APR is variable</h3>
+        <p style="color:var(--muted)">Each pool has a fixed APE reward allocation per time period. The APR you earn is your share of that fixed allocation — which shrinks as more APE is staked in the pool. If the BAYC pool allocates 1,000,000 APE per year and 10,000,000 APE is staked by all BAYC holders combined, the APR is 10%. If staked APE doubles to 20,000,000, the APR halves to 5%.</p>
+        <div class="kpi-badges"><span>Fixed allocation</span><span>Variable APR</span><span>Dilution as TVL grows</span></div>
+      </div>
+      <div class="mini">
+        <h3>Reward distribution schedule</h3>
+        <p style="color:var(--muted)">ApeStake's rewards were originally distributed over a multi-year schedule with decreasing annual allocations — front-loaded with higher rewards in early periods to incentivise initial adoption. As the programme matures, the reward rate decreases. Check the current live reward rates in the official ApeStake interface for the most accurate APR data.</p>
+        <div class="kpi-badges"><span>Decreasing schedule</span><span>Front-loaded</span><span>Check live APR</span></div>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>The cap limits concentration, not total APR:</strong>
+      The per-NFT APE cap doesn't affect your APR directly —
+      it only limits how much APE you can stake per position.
+      A BAYC holder at the pool cap earns the same APR percentage
+      as a BAYC holder at half the cap.
+      The cap ensures no single wallet can monopolise a pool
+      by staking an unlimited amount of APE behind one NFT.
+    </div>
+  </section>
+
+  <!-- CLAIMING -->
+  <section class="card" id="claiming">
+    <h2>Claiming and Compounding: Maximising Long-Term APE Yield</h2>
+    <p>
+      APE rewards accrue continuously from block to block
+      but must be manually claimed via an on-chain transaction.
+      The optimal claiming and compounding frequency balances
+      gas costs against the benefit of restaking rewards sooner.
+    </p>
+
+    <div class="table-wrap">
+      <table aria-label="Claiming strategy">
+        <thead>
+          <tr><th>Claiming frequency</th><th>Gas cost impact</th><th>Compounding benefit</th><th>Best for</th></tr>
+        </thead>
+        <tbody>
+          <tr class="hi">
+            <td>Daily claiming</td>
+            <td class="err">High — multiple gas fees per month</td>
+            <td class="ok">Maximum compounding frequency</td>
+            <td>Only viable with very large positions where daily APE &gt; gas cost</td>
+          </tr>
+          <tr>
+            <td>Weekly claiming</td>
+            <td class="warn">Moderate</td>
+            <td class="ok">Good compounding</td>
+            <td>Mid-to-large positions; balance gas vs compound benefit</td>
+          </tr>
+          <tr class="hi">
+            <td>Monthly claiming</td>
+            <td class="ok">Low relative to rewards</td>
+            <td class="warn">Moderate compounding</td>
+            <td>Smaller positions where gas represents a significant % of claimed APE</td>
+          </tr>
+          <tr>
+            <td>Claim only when needed</td>
+            <td class="ok">Minimal gas</td>
+            <td class="err">No compounding</td>
+            <td>Passive holders who treat staking as passive income without reinvestment</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note">
+      <strong>Compounding calculation:</strong> Before claiming, compare your pending APE reward
+      against the Ethereum gas cost of the claim transaction.
+      If pending rewards in USD are less than 3–5× the gas cost,
+      waiting for a larger accumulation or a lower gas period
+      is more economical than claiming immediately.
+      Monitor Etherscan's gas tracker for low-fee windows (typically weekend mornings UTC).
+    </div>
+  </section>
+
+  <!-- SAFETY -->
+  <section class="card" id="safety">
+    <h2>ApeStake Security and Risks</h2>
+
+    <div class="table-wrap">
+      <table aria-label="Risk analysis">
+        <thead>
+          <tr><th>Risk</th><th>Level</th><th>Mitigation</th></tr>
+        </thead>
+        <tbody>
+          <tr class="hi">
+            <td>Smart-contract exploit</td>
+            <td class="warn">Medium</td>
+            <td>ApeStake contracts audited by multiple firms; Horizen Labs team has strong track record; large TVL provides ongoing security scrutiny from the community</td>
+          </tr>
+          <tr>
+            <td>APE price depreciation</td>
+            <td class="warn">Medium-High</td>
+            <td>All rewards are APE-denominated; falling APE price reduces USD yield value. Staking APE during a bear market in APE can result in negative real returns if APE falls faster than rewards accumulate</td>
+          </tr>
+          <tr class="hi">
+            <td>NFT price risk (BAYC/MAYC/BAKC)</td>
+            <td class="warn">Medium-High</td>
+            <td>The enhanced APE yield only justifies owning a BAYC/MAYC if the combined yield over time offsets the NFT purchase risk. NFT prices are highly volatile — do not buy an NFT solely for staking yield</td>
+          </tr>
+          <tr>
+            <td>Accidental NFT transfer while staked</td>
+            <td class="warn">Low (user-controlled)</td>
+            <td>Verify NFT staking status before initiating any transfer. Unstake first, then transfer if needed. Accrued rewards are still claimable after the auto-unstake triggered by a transfer</td>
+          </tr>
+          <tr class="hi">
+            <td>Phishing / fake ApeStake sites</td>
+            <td class="err">High (user-controlled)</td>
+            <td>Bookmark apestake.io directly. Verify domain every session. The official site is maintained by Horizen Labs — any other staking site claiming to be ApeStake is likely a phishing scam</td>
+          </tr>
+          <tr>
+            <td>Reward schedule changes via DAO</td>
+            <td class="warn">Low-Medium</td>
+            <td>ApeCoin DAO can vote to modify reward parameters. Monitor governance proposals at apecoin.com and participate in DAO votes to influence reward programme decisions</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- COMPARISON -->
+  <section class="card" id="comparison">
+    <h2>ApeStake vs Other NFT Staking Protocols</h2>
+
+    <div class="table-wrap">
+      <table aria-label="NFT staking comparison">
+        <thead>
+          <tr><th>Feature</th><th>ApeStake</th><th>NFT-linked yield (general)</th><th>Third-party APE vaults</th></tr>
+        </thead>
+        <tbody>
+          <tr class="hi">
+            <td>Official status</td>
+            <td class="ok">Yes — official DAO protocol</td>
+            <td class="warn">Varies — often unofficial</td>
+            <td class="warn">Unofficial — third-party</td>
+          </tr>
+          <tr>
+            <td>NFT custody</td>
+            <td class="ok">Non-custodial — NFT stays in wallet</td>
+            <td class="err">Often requires NFT transfer to contract</td>
+            <td class="warn">APE custodied in vault contract</td>
+          </tr>
+          <tr class="hi">
+            <td>Reward token</td>
+            <td>APE (protocol native)</td>
+            <td>Various — often project native token</td>
+            <td>APE + vault token</td>
+          </tr>
+          <tr>
+            <td>Audit status</td>
+            <td class="ok">Multiple audits</td>
+            <td class="warn">Varies widely</td>
+            <td class="warn">Varies — check individually</td>
+          </tr>
+          <tr class="hi">
+            <td>DAO governance</td>
+            <td class="ok">ApeCoin DAO controlled</td>
+            <td class="warn">Varies</td>
+            <td class="warn">Third-party controlled</td>
+          </tr>
+          <tr>
+            <td>BAKC paired pool</td>
+            <td class="ok">Yes — unique mechanic</td>
+            <td class="err">No</td>
+            <td class="warn">Some via integration</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note gold" style="margin-top:1rem">
+      <strong>Only stake with the official protocol:</strong> Multiple third-party platforms
+      offer "APE staking" with higher advertised APRs — these introduce additional
+      smart-contract risk layers, potential custody risks, and often lack the DAO-backed
+      security that ApeStake provides. For BAYC ecosystem participants,
+      the official ApeStake protocol at apestake.io is the recommended and safest venue.
+    </div>
+  </section>
+
+  <!-- BEST PRACTICES -->
+  <section class="card" id="best-practices">
+    <h2>Best Practices for APE Stakers and NFT Holders</h2>
+    <ul style="padding-left:1.2rem">
+      <li style="margin-bottom:.5rem"><strong>Stake at or near the pool cap per NFT</strong> — the maximum APE cap per NFT maximises your yield. If you have fewer APE than the cap, stake all available APE. Only NFT holders can access the enhanced per-NFT rate, so utilise it fully.</li>
+      <li style="margin-bottom:.5rem"><strong>Check live APR before making decisions</strong> — APR fluctuates with total staked APE. The official ApeStake interface shows the current APR for each pool. Don't assume historical APRs continue — verify before committing capital.</li>
+      <li style="margin-bottom:.5rem"><strong>Unstake before transferring any NFT</strong> — if you intend to sell or transfer your BAYC, MAYC, or BAKC, unstake the associated position first to cleanly close it and claim any pending rewards. An auto-unstake triggered by a sale is harmless but claims may require a separate transaction.</li>
+      <li style="margin-bottom:.5rem"><strong>Claim during low gas windows</strong> — Ethereum gas spikes during market volatility, which is often when you're most tempted to act. Use Etherscan's gas tracker; claim during calm, low-activity periods (often weekend mornings UTC) to minimise claiming costs.</li>
+      <li style="margin-bottom:.5rem"><strong>Compound claimed APE back into the APE pool</strong> — if your NFT pools are already at cap, restake claimed APE into the general APE pool for additional compounding yield on top of your NFT positions.</li>
+      <li style="margin-bottom:.5rem"><strong>Participate in ApeCoin DAO governance</strong> — reward programme parameters are set by DAO vote. APE stakers and NFT holders who don't vote cede influence over the programme's future to more active participants.</li>
+      <li><strong>Revoke ApeStake approvals after any session where you make changes</strong> — use Revoke.cash periodically to audit and clear any stale approvals granted to the ApeStake contracts.</li>
+    </ul>
+  </section>
+
+  <!-- TROUBLESHOOTING -->
+  <section class="card" id="troubleshooting">
+    <h2>Troubleshooting ApeStake: Missing Rewards, NFT Transfers, and Staking Errors</h2>
+
+    <h3>"My pending APE rewards show zero after staking"</h3>
+    <ul style="padding-left:1.2rem">
+      <li>APE rewards accrue per Ethereum block (~12 seconds). After a fresh stake, you'll see a very small reward amount almost immediately, but it takes time to accumulate to a visible USD value. Wait at least a few hours before expecting meaningful pending rewards.</li>
+      <li>Confirm the staking transaction completed successfully on Etherscan. If the transaction failed, no staking occurred and no rewards are accruing. Check the transaction hash for a success confirmation.</li>
+    </ul>
+
+    <h3>"My BAYC/MAYC was sold and I can't find my pending rewards"</h3>
+    <ul style="padding-left:1.2rem">
+      <li>When an NFT transfer triggers auto-unstake, the APE principal and any accrued pending rewards become claimable by the original staker's wallet. Connect the wallet that originally staked to ApeStake and check for pending claims. The rewards don't disappear — they're claimable but require a separate claim transaction.</li>
+    </ul>
+
+    <h3>"My BAKC staking transaction keeps failing"</h3>
+    <ul style="padding-left:1.2rem">
+      <li>BAKC transactions require a valid pairing with a BAYC or MAYC in the same wallet. Verify both the BAKC and the BAYC/MAYC you're pairing are in the wallet you're connecting — not in a different wallet or vault.</li>
+      <li>If the BAYC/MAYC is already at its individual pool cap in the BAYC/MAYC pool, the BAKC pairing can still proceed — the BAKC pool is separate from the BAYC/MAYC pool, so the pairing doesn't require the BAYC/MAYC to have unused APE capacity.</li>
+    </ul>
+
+    <div class="note">
+      <strong>Etherscan is definitive:</strong> For any ApeStake transaction question,
+      search your wallet address on Etherscan and look at the contract interactions
+      with the official ApeStake contract address (verified on apestake.io).
+      The on-chain record shows exact stake amounts, positions, and pending rewards.
+    </div>
+  </section>
+
+  <!-- EEAT -->
+  <section class="eeat" id="eeat" aria-labelledby="eeat-title">
+    <h2 id="eeat-title">ApeStake: Authoritative References &amp; External Sources</h2>
+
+    <h3>ApeStake &amp; ApeCoin — Official Sources</h3>
+    <ul style="padding-left:1.2rem">
+      <li><a href="https://apestake.io/" target="_blank" rel="noopener nofollow">ApeStake — Official Staking Interface</a></li>
+      <li><a href="https://apecoin.com/" target="_blank" rel="noopener nofollow">ApeCoin — Official Website &amp; DAO</a></li>
+      <li><a href="https://forum.apecoin.com/" target="_blank" rel="noopener nofollow">ApeCoin DAO — Governance Forum</a></li>
+      <li><a href="https://github.com/HorizenLabs" target="_blank" rel="noopener nofollow">Horizen Labs — Smart Contracts (GitHub)</a></li>
+    </ul>
+
+    <h3>NFT Ecosystem</h3>
+    <ul style="padding-left:1.2rem">
+      <li><a href="https://boredapeyachtclub.com/" target="_blank" rel="noopener nofollow">Bored Ape Yacht Club — Official Website</a></li>
+      <li><a href="https://opensea.io/collection/boredapeyachtclub" target="_blank" rel="noopener nofollow">OpenSea — BAYC Collection</a></li>
+      <li><a href="https://etherscan.io/" target="_blank" rel="noopener nofollow">Etherscan — ApeStake Contract Verification</a></li>
+    </ul>
+
+    <h3>Data &amp; Analytics</h3>
+    <ul style="padding-left:1.2rem">
+      <li><a href="https://defillama.com/protocol/apestake" target="_blank" rel="noopener nofollow">DeFiLlama — ApeStake TVL Data</a></li>
+      <li><a href="https://dune.com/browse/dashboards" target="_blank" rel="noopener nofollow">Dune Analytics — ApeStake On-Chain Dashboards</a></li>
+      <li><a href="https://revoke.cash/" target="_blank" rel="noopener nofollow">Revoke.cash — Token Approval Manager</a></li>
+    </ul>
+
+    <div class="note" style="margin-top:1.2rem">
+      <strong>About:</strong> Prepared by Crypto Finance Experts as a practical, SEO-oriented knowledge base for
+      <em>ApeStake</em>: four staking pools, BAYC/MAYC/BAKC NFT mechanics, APE token, reward structure, claiming strategy, security, and troubleshooting.
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="card" id="faq" aria-labelledby="faq-title">
+    <h2 id="faq-title" style="margin-top:0;border-top:none;padding-top:0">ApeStake: Frequently Asked Questions</h2>
+
+    <div class="faq-item">
+      <button class="faq-button" aria-expanded="false" aria-controls="f1" id="b1">
+        <h3>What is ApeStake and who built it?</h3><span class="faq-plus">+</span>
+      </button>
+      <div id="f1" class="faq-content" role="region" aria-labelledby="b1">
+        <p>ApeStake is the official APE token staking protocol for the Bored Ape Yacht Club ecosystem, built by Horizen Labs on behalf of ApeCoin DAO. It was launched in December 2022 following an ApeCoin DAO governance vote to allocate APE tokens as staking rewards across four pools. It is the only official venue for BAYC, MAYC, and BAKC NFT holders to stake their NFTs and earn enhanced APE allocations as approved by the DAO. The protocol runs on Ethereum mainnet with audited smart contracts.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-button" aria-expanded="false" aria-controls="f2" id="b2">
+        <h3>Do I need a BAYC/MAYC/BAKC NFT to use ApeStake?</h3><span class="faq-plus">+</span>
+      </button>
+      <div id="f2" class="faq-content" role="region" aria-labelledby="b2">
+        <p>No — the general ApeCoin Pool is open to any APE holder without any NFT requirement. However, the BAYC, MAYC, and BAKC pools are exclusive to holders of those respective NFTs and offer higher per-APE reward rates due to their larger fixed allocations relative to typical staked amounts. If you don't hold a BAYC/MAYC/BAKC, you can still stake APE in the general pool and earn rewards — you just won't access the enhanced NFT pool rates.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-button" aria-expanded="false" aria-controls="f3" id="b3">
+        <h3>Does ApeStake take custody of my NFT?</h3><span class="faq-plus">+</span>
+      </button>
+      <div id="f3" class="faq-content" role="region" aria-labelledby="b3">
+        <p>No — your BAYC, MAYC, or BAKC stays in your wallet throughout the staking process. ApeStake registers the NFT's tokenID to your staking position on-chain, but no transfer occurs. Your NFT continues to appear in your wallet and OpenSea profile, and you can still list it for sale. If you sell or transfer the NFT while staked, the position automatically closes — your APE principal and accrued rewards become claimable from your original wallet, and the new NFT owner starts with a fresh (unstaked) NFT.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-button" aria-expanded="false" aria-controls="f4" id="b4">
+        <h3>How does the BAKC paired pool work?</h3><span class="faq-plus">+</span>
+      </button>
+      <div id="f4" class="faq-content" role="region" aria-labelledby="b4">
+        <p>The BAKC pool requires pairing a Bored Ape Kennel Club (Dog) NFT with either a BAYC or MAYC NFT from the same wallet. Both NFTs are committed to the paired position simultaneously. You stake APE up to the BAKC pool cap in this position. The BAYC or MAYC used in the pairing can also have its own separate position in the BAYC/MAYC pool — the pairing doesn't interfere with those pools. You can unpair at any time, which closes the BAKC position and makes your APE and rewards claimable.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-button" aria-expanded="false" aria-controls="f5" id="b5">
+        <h3>What APR does ApeStake pay?</h3><span class="faq-plus">+</span>
+      </button>
+      <div id="f5" class="faq-content" role="region" aria-labelledby="b5">
+        <p>APR is variable and changes continuously based on how much APE is staked in each pool. Each pool has a fixed APE reward allocation per period — as more APE is staked, each staker's share of that allocation shrinks and APR falls. As APE is unstaked, APR rises. For the current live APR, check the official ApeStake interface at apestake.io — it shows real-time rates for all four pools. Historical APRs range from single digits to over 30% depending on participation levels and market conditions.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-button" aria-expanded="false" aria-controls="f6" id="b6">
+        <h3>Is there a lockup period on ApeStake?</h3><span class="faq-plus">+</span>
+      </button>
+      <div id="f6" class="faq-content" role="region" aria-labelledby="b6">
+        <p>No — there is no lockup period on any ApeStake pool. You can unstake your APE at any time and receive it back immediately (in the same transaction). This is a deliberate design choice — unlike many staking protocols with lockups, ApeStake prioritises liquidity for participants. The only constraint is the per-NFT stake cap, which limits how much APE you can put in per NFT position, not how long it must stay.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-button" aria-expanded="false" aria-controls="f7" id="b7">
+        <h3>How do I claim my APE staking rewards?</h3><span class="faq-plus">+</span>
+      </button>
+      <div id="f7" class="faq-content" role="region" aria-labelledby="b7">
+        <p>APE rewards accrue every Ethereum block but must be manually claimed. Connect your wallet to apestake.io, navigate to your active positions, and click "Claim" for the pool you want to collect from. The claim is an on-chain Ethereum transaction — you'll pay a gas fee and receive your APE directly to your wallet. You can then hold it, sell it, or restake it in the APE pool for compounding. There is no deadline to claim — unclaimed rewards remain available indefinitely.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-button" aria-expanded="false" aria-controls="f8" id="b8">
+        <h3>What happens to my stake if I sell my BAYC?</h3><span class="faq-plus">+</span>
+      </button>
+      <div id="f8" class="faq-content" role="region" aria-labelledby="b8">
+        <p>When your BAYC is sold (i.e. transferred to the buyer's wallet), the ApeStake contract detects the ownership change and automatically closes the associated staking position. Your staked APE and all pending accrued rewards become claimable from your original wallet — they're not lost. You'll need to submit a separate claim transaction to receive them. The new BAYC owner receives the NFT with no staking position — they must stake independently if they choose to participate.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-button" aria-expanded="false" aria-controls="f9" id="b9">
+        <h3>Should I buy a BAYC just to access the BAYC staking pool?</h3><span class="faq-plus">+</span>
+      </button>
+      <div id="f9" class="faq-content" role="region" aria-labelledby="b9">
+        <p>This requires careful financial analysis. The BAYC pool's enhanced APR only makes financial sense if the additional APE yield over your holding period materially offsets the cost and risk of buying a BAYC. At current BAYC prices (typically 10–20+ ETH), the APR required to justify the purchase solely for staking yield would need to be extremely high and sustained for years. BAYC prices are also volatile and correlated with NFT market sentiment. Most financial advisors would suggest only buying a BAYC if you value NFT ownership independently — don't treat the staking yield as a primary investment thesis for acquiring one.</p>
+      </div>
+    </div>
+
+  </section>
+
+</main>
+
+<footer class="container" role="contentinfo" style="padding:2.5rem 0; border-top:1px solid var(--line); margin-top:2rem">
+  <p style="color:var(--dim); font-size:.93rem">© 2026 ApeStake Guide. Educational content with a security-first operational focus. Not financial advice.</p>
+</footer>
+
+<script>
+  document.querySelectorAll('.faq-button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const isOpen = btn.getAttribute('aria-expanded') === 'true';
+      document.querySelectorAll('.faq-button').forEach(b => {
+        b.setAttribute('aria-expanded', 'false');
+        const c = document.getElementById(b.getAttribute('aria-controls'));
+        c.classList.remove('open'); c.style.maxHeight = '0';
+      });
+      if (!isOpen) {
+        btn.setAttribute('aria-expanded', 'true');
+        const content = document.getElementById(btn.getAttribute('aria-controls'));
+        content.classList.add('open');
+        content.style.maxHeight = content.scrollHeight + 'px';
+      }
+    });
+  });
+</script>
+</body>
+</html>
